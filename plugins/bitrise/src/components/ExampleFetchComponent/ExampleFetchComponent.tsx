@@ -15,7 +15,6 @@
  */
 
 import React, { FC } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import {
   Table,
   TableColumn,
@@ -25,14 +24,6 @@ import {
 } from '@backstage/core';
 import Alert from '@material-ui/lab/Alert';
 import { useAsync } from 'react-use';
-
-const useStyles = makeStyles({
-  avatar: {
-    height: 32,
-    width: 32,
-    borderRadius: '50%',
-  },
-});
 
 type Workflow = {
   workflow: string; // "osx-pamparam-pimpirim"
@@ -47,8 +38,6 @@ type DenseTableProps = {
 };
 
 export const DenseTable: FC<DenseTableProps> = ({ apps }) => {
-  const classes = useStyles();
-
   const columns: TableColumn[] = [
     { title: 'Workflow', field: 'workflow' },
     { title: 'Status', field: 'status' },
