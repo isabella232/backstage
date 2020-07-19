@@ -5,6 +5,7 @@
   "dependencies": {
     "@backstage/cli": "^0.1.1-alpha.14",
     "@backstage/core": "^0.1.1-alpha.14",
+    "@backstage/plugin-bitrise": "^0.1.1-alpha.14",
     "@backstage/plugin-catalog": "^0.1.1-alpha.14",
     "@backstage/plugin-circleci": "^0.1.1-alpha.14",
     "@backstage/plugin-explore": "^0.1.1-alpha.14",
