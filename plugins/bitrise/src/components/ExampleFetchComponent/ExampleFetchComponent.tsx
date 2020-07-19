@@ -58,7 +58,7 @@ export const DenseTable: FC<DenseTableProps> = ({ apps }) => {
   ];
 
   const data = apps.map(app => {
-    const stat = app.status ? <StatusOK /> : <StatusError />;
+    const stat = app.status === 1 ? <StatusOK /> : <StatusError />;
     return {
       workflow: app.triggered_workflow,
       status: stat,
