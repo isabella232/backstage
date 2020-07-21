@@ -14,4 +14,21 @@
  * limitations under the License.
  */
 
-export { default } from './ExampleComponent';
+import React from 'react';
+import { render } from '@testing-library/react';
+import mockFetch from 'jest-fetch-mock';
+import Bitrise from './Bitrise';
+import { ThemeProvider } from '@material-ui/core';
+import { lightTheme } from '@backstage/theme';
+
+describe('Bitrise', () => {
+  it('should render', () => {
+    mockFetch.mockResponse(() => new Promise(() => {}));
+    const rendered = render(
+      <ThemeProvider theme={lightTheme}>
+        <Bitrise />
+      </ThemeProvider>,
+    );
+    expect(rendered.getByText('Welcome to Bitrise!')).toBeInTheDocument();
+  });
+});

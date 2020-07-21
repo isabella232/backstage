@@ -78,7 +78,7 @@ export const DenseTable: FC<DenseTableProps> = ({ apps }) => {
   );
 };
 
-const Bitrise: FC<{}> = () => {
+const BitriseCore: FC<{}> = () => {
   const config = require('./config');
   const { value, loading, error } = useAsync(async (): Promise<User[]> => {
     //    const response = await fetch('https://randomuser.me/api/?results=20');
@@ -105,4 +105,4 @@ const Bitrise: FC<{}> = () => {
   return <DenseTable apps={value || []} />;
 };
 
-export default Bitrise;
+export default BitriseCore;

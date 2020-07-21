@@ -15,7 +15,7 @@
  */
 
 import { createPlugin, createRouteRef } from '@backstage/core';
-import ExampleComponent from './components/ExampleComponent';
+import Bitrise from './components/Bitrise';
 
 export const rootRouteRef = createRouteRef({
   path: '/bitrise',
@@ -25,6 +25,6 @@ export const rootRouteRef = createRouteRef({
 export const plugin = createPlugin({
   id: 'bitrise',
   register({ router }) {
-    router.addRoute(rootRouteRef, ExampleComponent);
+    router.addRoute(rootRouteRef, Bitrise);
   },
 });

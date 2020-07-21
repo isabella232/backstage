@@ -17,12 +17,12 @@
 import React, { FC } from 'react';
 import { Grid } from '@material-ui/core';
 import { Header, Page, pageTheme, Content, HeaderLabel } from '@backstage/core';
-import Bitrise from '../Bitrise';
+import BitriseCore from '../BitriseCore';
 import Settings from '../Settings';
 
-const ExampleComponent: FC<{}> = () => (
+const Bitrise: FC<{}> = () => (
   <Page theme={pageTheme.tool}>
-    <Header title="Welcome to bitrise!" subtitle="Optional subtitle">
+    <Header title="Welcome to Bitrise!" subtitle="Optional subtitle">
       <HeaderLabel label="Owner" value="Team X" />
       <HeaderLabel label="Lifecycle" value="Alpha" />
     </Header>
@@ -32,11 +32,11 @@ const ExampleComponent: FC<{}> = () => (
           <Settings />
         </Grid>
         <Grid item>
-          <Bitrise />
+          <BitriseCore />
         </Grid>
       </Grid>
     </Content>
   </Page>
 );
 
-export default ExampleComponent;
+export default Bitrise;
