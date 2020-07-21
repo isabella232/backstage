@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { FC, useContext } from 'react';
+import { CurrentState } from '../../context/store';
 import {
   Table,
   TableColumn,
@@ -39,6 +39,8 @@ type DenseTableProps = {
 };
 
 export const DenseTable: FC<DenseTableProps> = ({ apps }) => {
+  const state = useContext(CurrentState);
+
   const columns: TableColumn[] = [
     { title: 'Workflow', field: 'workflow' },
     { title: 'Started', field: 'started' },
