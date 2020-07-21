@@ -32,10 +32,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Settings = () => {
   const classes = useStyles();
-  const [age, setAge] = useState('');
+  const [view, setView] = useState('');
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setAge(event.target.value as string);
+    setView(event.target.value as string);
   };
 
   return (
@@ -45,15 +45,15 @@ const Settings = () => {
         <Select
           labelId="views-label"
           id="views"
-          value={age}
+          value={view}
           onChange={handleChange}
         >
           <MenuItem value="latest on master">Latest on master</MenuItem>
           <MenuItem value="all">All</MenuItem>
         </Select>
-        <TextField id="app_slug" label="AppSlug" variant="filled" />
+        <TextField id="appslug" label="App Slug" variant="filled" />
         <TextField
-          id="authorization_token"
+          id="authorizationtoken"
           label="Authorization token"
           variant="filled"
         />

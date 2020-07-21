@@ -16,16 +16,13 @@
 
 import React, { FC } from 'react';
 import { Grid } from '@material-ui/core';
-import { Header, Page, pageTheme, Content, HeaderLabel } from '@backstage/core';
+import { Header, Page, pageTheme, Content } from '@backstage/core';
 import BitriseCore from '../BitriseCore';
 import Settings from '../Settings';
 
 const Bitrise: FC<{}> = () => (
   <Page theme={pageTheme.tool}>
-    <Header title="Welcome to Bitrise!" subtitle="Optional subtitle">
-      <HeaderLabel label="Owner" value="Team X" />
-      <HeaderLabel label="Lifecycle" value="Alpha" />
-    </Header>
+    <Header title="Welcome to Bitrise Builds!" />
     <Content>
       <Grid container spacing={3} direction="column">
         <Grid item>
