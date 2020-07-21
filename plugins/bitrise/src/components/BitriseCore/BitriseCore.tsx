@@ -34,21 +34,11 @@ type Workflow = {
   branch: string; // "master"
 };
 
-const useStyles = makeStyles({
-  avatar: {
-    height: 32,
-    width: 32,
-    borderRadius: '50%',
-  },
-});
-
 type DenseTableProps = {
   apps: Workflow[];
 };
 
 export const DenseTable: FC<DenseTableProps> = ({ apps }) => {
-  const classes = useStyles();
-
   const columns: TableColumn[] = [
     { title: 'Workflow', field: 'workflow' },
     { title: 'Started', field: 'started' },
@@ -56,8 +46,13 @@ export const DenseTable: FC<DenseTableProps> = ({ apps }) => {
     { title: 'Branch', field: 'branch' },
   ];
 
-  const data = apps.map(app => {
-    const stat = app.status === 1 ? <StatusOK /> : <StatusError />;
+  const data = apps.map((app, index) => {
+    const stat =
+      app.status === 1 ? (
+        <StatusOK key={index.toString()} />
+      ) : (
+        <StatusError key={index.toString()} />
+      );
     return {
       workflow: [stat, app.original_build_params.workflow_id],
       started: app.started_on_worker_at,
