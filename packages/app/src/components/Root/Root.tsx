@@ -20,6 +20,7 @@ import { Link, makeStyles } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import ExploreIcon from '@material-ui/icons/Explore';
 import BuildIcon from '@material-ui/icons/BuildRounded';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import RuleIcon from '@material-ui/icons/AssignmentTurnedIn';
 import MapIcon from '@material-ui/icons/MyLocation';
 import LibraryBooks from '@material-ui/icons/LibraryBooks';
@@ -97,6 +98,7 @@ const Root: FC<{}> = ({ children }) => (
       <SidebarItem icon={MapIcon} to="tech-radar" text="Tech Radar" />
       <SidebarItem icon={RuleIcon} to="lighthouse" text="Lighthouse" />
       <SidebarItem icon={BuildIcon} to="circleci" text="CircleCI" />
+      <SidebarItem icon={CheckCircleOutlineIcon} to="bitrise" text="Bitrise" />
       <SidebarItem
         icon={graphiQLRouteRef.icon!}
         to={graphiQLRouteRef.path}
