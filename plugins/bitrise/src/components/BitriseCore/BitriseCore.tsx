@@ -50,7 +50,6 @@ export const DenseTable: FC<DenseTableProps> = ({ apps }) => {
   const classes = useStyles();
 
   const columns: TableColumn[] = [
-    { title: '', field: 'status' },
     { title: 'Workflow', field: 'workflow' },
     { title: 'Started', field: 'started' },
     { title: 'Triggered', field: 'triggered' },
@@ -60,8 +59,7 @@ export const DenseTable: FC<DenseTableProps> = ({ apps }) => {
   const data = apps.map(app => {
     const stat = app.status === 1 ? <StatusOK /> : <StatusError />;
     return {
-      status: stat,
-      workflow: app.original_build_params.workflow_id,
+      workflow: [stat, app.original_build_params.workflow_id],
       started: app.started_on_worker_at,
       triggered: app.triggered_at,
       branch: app.original_build_params.branch,
