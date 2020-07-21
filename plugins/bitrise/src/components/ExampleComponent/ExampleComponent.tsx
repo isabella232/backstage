@@ -15,18 +15,10 @@
  */
 
 import React, { FC } from 'react';
-import { Typography, Grid } from '@material-ui/core';
-import {
-  InfoCard,
-  Header,
-  Page,
-  pageTheme,
-  Content,
-  ContentHeader,
-  HeaderLabel,
-  SupportButton,
-} from '@backstage/core';
-import ExampleFetchComponent from '../ExampleFetchComponent';
+import { Grid } from '@material-ui/core';
+import { Header, Page, pageTheme, Content, HeaderLabel } from '@backstage/core';
+import Bitrise from '../Bitrise';
+import Settings from '../Settings';
 
 const ExampleComponent: FC<{}> = () => (
   <Page theme={pageTheme.tool}>
@@ -35,12 +27,12 @@ const ExampleComponent: FC<{}> = () => (
       <HeaderLabel label="Lifecycle" value="Alpha" />
     </Header>
     <Content>
-      <ContentHeader title="Bitrise">
-        <SupportButton>A description of your plugin goes here.</SupportButton>
-      </ContentHeader>
       <Grid container spacing={3} direction="column">
         <Grid item>
-          <ExampleFetchComponent />
+          <Settings />
+        </Grid>
+        <Grid item>
+          <Bitrise />
         </Grid>
       </Grid>
     </Content>

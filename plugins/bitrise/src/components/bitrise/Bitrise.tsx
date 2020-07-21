@@ -15,6 +15,7 @@
  */
 
 import React, { FC } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import {
   Table,
   TableColumn,
@@ -26,21 +27,31 @@ import Alert from '@material-ui/lab/Alert';
 import { useAsync } from 'react-use';
 
 type Workflow = {
-  workflow: string; // "osx-pamparam-pimpirim"
   status: string; // "success"
+  workflow: string; // "osx-pamparam-pimpirim"
   started: string; // 2020-07-19T06:01:18Z
   triggered: string; // 2020-07-19T06:01:18Z
   branch: string; // "master"
 };
+
+const useStyles = makeStyles({
+  avatar: {
+    height: 32,
+    width: 32,
+    borderRadius: '50%',
+  },
+});
 
 type DenseTableProps = {
   apps: Workflow[];
 };
 
 export const DenseTable: FC<DenseTableProps> = ({ apps }) => {
+  const classes = useStyles();
+
   const columns: TableColumn[] = [
+    { title: '', field: 'status' },
     { title: 'Workflow', field: 'workflow' },
-    { title: 'Status', field: 'status' },
     { title: 'Started', field: 'started' },
     { title: 'Triggered', field: 'triggered' },
     { title: 'Branch', field: 'branch' },
@@ -49,8 +60,8 @@ export const DenseTable: FC<DenseTableProps> = ({ apps }) => {
   const data = apps.map(app => {
     const stat = app.status === 1 ? <StatusOK /> : <StatusError />;
     return {
-      workflow: app.triggered_workflow,
       status: stat,
+      workflow: app.original_build_params.workflow_id,
       started: app.started_on_worker_at,
       triggered: app.triggered_at,
       branch: app.original_build_params.branch,
@@ -67,16 +78,17 @@ export const DenseTable: FC<DenseTableProps> = ({ apps }) => {
   );
 };
 
-const ExampleFetchComponent: FC<{}> = () => {
+const Bitrise: FC<{}> = () => {
+  const config = require('./config');
   const { value, loading, error } = useAsync(async (): Promise<User[]> => {
     //    const response = await fetch('https://randomuser.me/api/?results=20');
     const response = await fetch(
-      'https://api.bitrise.io/v0.1/apps/<slug>/builds',
+      `https://api.bitrise.io/v0.1/apps/${config.app_slug}/builds`,
       {
         headers: {
           accept: 'application/json',
           'Content-Type': 'application/json',
-          Authorization: '<bitrise-access-token>',
+          Authorization: config.auth_token,
         },
       },
     );
@@ -93,4 +105,4 @@ const ExampleFetchComponent: FC<{}> = () => {
   return <DenseTable apps={value || []} />;
 };
 
-export default ExampleFetchComponent;
+export default Bitrise;
