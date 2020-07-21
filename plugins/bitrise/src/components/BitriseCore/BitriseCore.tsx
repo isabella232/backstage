@@ -79,7 +79,7 @@ export const DenseTable: FC<DenseTableProps> = ({ apps }) => {
 };
 
 const BitriseCore: FC<{}> = () => {
-  const config = require('./config');
+  const config = require('./config.js');
   const { value, loading, error } = useAsync(async (): Promise<User[]> => {
     //    const response = await fetch('https://randomuser.me/api/?results=20');
     const response = await fetch(
