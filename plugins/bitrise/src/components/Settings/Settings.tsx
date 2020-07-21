@@ -14,11 +14,52 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import { StatusPending } from '@backstage/core';
+import React, { useState } from 'react';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { InfoCard } from '@backstage/core';
+import { InputLabel, Select, MenuItem, TextField } from '@material-ui/core';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      '& > *': {
+        margin: theme.spacing(1),
+        width: '25ch',
+      },
+    },
+  }),
+);
 
 const Settings = () => {
-  return <StatusPending />;
+  const classes = useStyles();
+  const [age, setAge] = useState('');
+
+  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setAge(event.target.value as string);
+  };
+
+  return (
+    <InfoCard title="Settings">
+      <form className={classes.root}>
+        <InputLabel id="views-label">Views</InputLabel>
+        <Select
+          labelId="views-label"
+          id="views"
+          value={age}
+          onChange={handleChange}
+        >
+          <MenuItem value="latest on master">Latest on master</MenuItem>
+          <MenuItem value="all">All</MenuItem>
+        </Select>
+        <TextField id="app_slug" label="AppSlug" variant="filled" />
+        <TextField
+          id="authorization_token"
+          label="Authorization token"
+          variant="filled"
+        />
+      </form>
+    </InfoCard>
+  );
 };
 
 export default Settings;
