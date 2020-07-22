@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { Progress, StatusOK, StatusError } from '@backstage/core';
 import Alert from '@material-ui/lab/Alert';
 import { useAsync } from 'react-use';
@@ -27,6 +27,8 @@ import {
   CardActions,
   Button,
 } from '@material-ui/core';
+
+import { RootContext } from '../../context/RootContext';
 
 type Workflow = {
   status: string; // "success"
@@ -58,6 +60,7 @@ const useStyles = makeStyles({
 });
 
 export const GridElement: FC<GridElementProps> = ({ apps }) => {
+  const { search, setSearch, view, setView } = useContext(RootContext);
   const classes = useStyles();
 
   const workflows = [];

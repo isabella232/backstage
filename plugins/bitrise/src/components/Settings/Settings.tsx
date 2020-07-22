@@ -43,7 +43,14 @@ const Settings = () => {
   const { search, setSearch, view, setView } = useContext(RootContext);
 
   const handleViewChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setSearch(event.target.value as string);
+    setView(event.target.value as string);
+  };
+
+  const handleSearchChange = ev => {
+    if (ev.key === 'Enter') {
+      setSearch(ev.target.value);
+      ev.preventDefault();
+    }
   };
 
   return (
@@ -61,8 +68,13 @@ const Settings = () => {
             <MenuItem value="all">All</MenuItem>
           </Select>
           <br />
-          <TextField id="standard-search" label="Search field" type="search" />
         </form>
+        <TextField
+          id="standard-search"
+          label="Search field"
+          type="search"
+          onKeyPress={handleSearchChange}
+        />
       </CardContent>
       <CardActions>
         <TextField id="appslug" label="App Slug" variant="filled" />
