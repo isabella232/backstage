@@ -24,6 +24,8 @@ import {
   CardContent,
   Typography,
   Grid,
+  CardActions,
+  Button,
 } from '@material-ui/core';
 
 type Workflow = {
@@ -58,32 +60,46 @@ const useStyles = makeStyles({
 export const GridElement: FC<GridElementProps> = ({ apps }) => {
   const classes = useStyles();
 
-  const data = apps.map((app, index) => {
-    const stat =
-      app.status === 1 ? (
-        <StatusOK key={index.toString()} />
-      ) : (
-        <StatusError key={index.toString()} />
+  const data = apps
+    .filter(
+      app => app.branch === 'master' && app.original_build_params.workflow_id,
+    )
+    .map((app, index) => {
+      const stat =
+        app.status === 1 ? (
+          <StatusOK key={index.toString()} />
+        ) : (
+          <StatusError key={index.toString()} />
+        );
+      return (
+        <Grid item xs={4}>
+          <Card className={classes.root}>
+            <CardContent>
+              <Typography variant="h4" component="h2">
+                {stat} {app.original_build_params.workflow_id}
+              </Typography>
+              <Typography variant="h6" className={classes.pos} component="h4">
+                <br />
+                Started: {app.started_on_worker_at}
+                <br />
+                Triggered at: {app.triggered_at}
+                <br />
+                Branch: {app.original_build_params.branch}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button
+                size="small"
+                color="primary"
+                href={`https://app.bitrise.io/build/${app.slug}`}
+              >
+                Details
+              </Button>
+            </CardActions>
+          </Card>
+        </Grid>
       );
-    return (
-      <Grid item xs={4}>
-        <Card className={classes.root}>
-          <CardContent>
-            <Typography variant="h5" component="h2">
-              {stat} {app.original_build_params.workflow_id}
-            </Typography>
-            <Typography variant="body2" className={classes.pos} component="p">
-              Started: {app.started_on_worker_at}
-              <br />
-              Triggered at: {app.triggered_at}
-              <br />
-              Branch: {app.original_build_params.branch}
-            </Typography>
-          </CardContent>
-        </Card>
-      </Grid>
-    );
-  });
+    });
   return data;
 };
 
