@@ -83,7 +83,7 @@ export const GridElement: FC<GridElementProps> = ({ apps }) => {
           <StatusError key={index.toString()} />
         );
       return (
-        <Grid item xs={4}>
+        <Grid item xs={4} key={Math.floor(Math.random() * Math.floor(30000))}>
           <Card className={classes.root}>
             <CardContent>
               <Typography variant="h4" component="h2">

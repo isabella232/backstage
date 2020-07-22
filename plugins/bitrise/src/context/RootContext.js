@@ -13,6 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from 'react';
+import React, { useState } from 'react';
 
-export const CurrentState = React.createContext({ view: 'all' });
+export const RootContext = React.createContext();
+
+const Anon = ({ children }) => {
+  const [search, setSearch] = useState();
+  const [view, setView] = useState('');
+
+  const defaultContext = {
+    search,
+    setSearch,
+    view,
+    setView,
+  };
+  return (
+    <RootContext.Provider value={defaultContext}>
+      {children}
+    </RootContext.Provider>
+  );
+};
+
+Anon.propTypes = {
+  children: React.children,
+};
+
+export default Anon;

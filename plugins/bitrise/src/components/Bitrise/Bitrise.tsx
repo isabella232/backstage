@@ -19,21 +19,24 @@ import { Grid } from '@material-ui/core';
 import { Header, Page, pageTheme, Content } from '@backstage/core';
 import BitriseCore from '../BitriseCore';
 import Settings from '../Settings';
+import RootContext from '../../context/RootContext';
 
 const Bitrise: FC<{}> = () => (
-  <Page theme={pageTheme.tool}>
-    <Header title="Welcome to Bitrise Builds!" />
-    <Content>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Settings />
+  <RootContext>
+    <Page theme={pageTheme.tool}>
+      <Header title="Welcome to Bitrise Builds!" />
+      <Content>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <Settings />
+          </Grid>
         </Grid>
-      </Grid>
-      <Grid container spacing={3}>
-        <BitriseCore />
-      </Grid>
-    </Content>
-  </Page>
+        <Grid container spacing={3}>
+          <BitriseCore />
+        </Grid>
+      </Content>
+    </Page>
+  </RootContext>
 );
 
 export default Bitrise;

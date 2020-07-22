@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { InfoCard } from '@backstage/core';
 import {
@@ -25,6 +25,7 @@ import {
   CardActions,
   CardContent,
 } from '@material-ui/core';
+import { RootContext } from '../../context/RootContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,10 +40,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Settings = () => {
   const classes = useStyles();
-  const [view, setView] = useState('');
+  const { search, setSearch, view, setView } = useContext(RootContext);
 
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setView(event.target.value as string);
+  const handleViewChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setSearch(event.target.value as string);
   };
 
   return (
@@ -54,7 +55,7 @@ const Settings = () => {
             labelId="views-label"
             id="views"
             value={view}
-            onChange={handleChange}
+            onChange={handleViewChange}
           >
             <MenuItem value="latest on master">Latest on master</MenuItem>
             <MenuItem value="all">All</MenuItem>
