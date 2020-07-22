@@ -60,11 +60,22 @@ const useStyles = makeStyles({
 export const GridElement: FC<GridElementProps> = ({ apps }) => {
   const classes = useStyles();
 
+  const workflows = [];
+
   const data = apps
     .filter(
       app => app.branch === 'master' && app.original_build_params.workflow_id,
     )
+    .filter(app => {
+      const workflow = app.original_build_params.workflow_id;
+      if (!workflows.includes(workflow)) {
+        workflows.push(workflow);
+        return true;
+      }
+      return false;
+    })
     .map((app, index) => {
+      const workflow = app.original_build_params.workflow_id;
       const stat =
         app.status === 1 ? (
           <StatusOK key={index.toString()} />
@@ -76,7 +87,7 @@ export const GridElement: FC<GridElementProps> = ({ apps }) => {
           <Card className={classes.root}>
             <CardContent>
               <Typography variant="h4" component="h2">
-                {stat} {app.original_build_params.workflow_id}
+                {stat} {workflow}
               </Typography>
               <Typography variant="h6" className={classes.pos} component="h4">
                 <br />
@@ -84,7 +95,7 @@ export const GridElement: FC<GridElementProps> = ({ apps }) => {
                 <br />
                 Triggered at: {app.triggered_at}
                 <br />
-                Branch: {app.original_build_params.branch}
+                Branch: {app.branch}
               </Typography>
             </CardContent>
             <CardActions>
@@ -121,9 +132,17 @@ const BitriseCore: FC<{}> = () => {
   }, []);
 
   if (loading) {
-    return <Progress />;
+    return (
+      <Grid item xs={12}>
+        <Progress />
+      </Grid>
+    );
   } else if (error) {
-    return <Alert severity="error">{error.message}</Alert>;
+    return (
+      <Grid item xs={12}>
+        <Alert severity="error">{error.message}</Alert>
+      </Grid>
+    );
   }
 
   return <GridElement apps={value || []} />;
