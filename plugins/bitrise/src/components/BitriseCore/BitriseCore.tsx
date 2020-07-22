@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-import React, { FC, useContext } from 'react';
-import { CurrentState } from '../../context/store';
-import {
-  Table,
-  TableColumn,
-  Progress,
-  StatusOK,
-  StatusError,
-} from '@backstage/core';
+import React, { FC } from 'react';
+import { Progress, StatusOK, StatusError } from '@backstage/core';
 import Alert from '@material-ui/lab/Alert';
 import { useAsync } from 'react-use';
+import {
+  makeStyles,
+  Card,
+  CardContent,
+  Typography,
+  Grid,
+} from '@material-ui/core';
 
 type Workflow = {
   status: string; // "success"
@@ -34,19 +34,29 @@ type Workflow = {
   branch: string; // "master"
 };
 
-type DenseTableProps = {
+type GridElementProps = {
   apps: Workflow[];
 };
 
-export const DenseTable: FC<DenseTableProps> = ({ apps }) => {
-  const state = useContext(CurrentState);
+const useStyles = makeStyles({
+  root: {
+    minWidth: 275,
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+});
 
-  const columns: TableColumn[] = [
-    { title: 'Workflow', field: 'workflow' },
-    { title: 'Started', field: 'started' },
-    { title: 'Triggered', field: 'triggered' },
-    { title: 'Branch', field: 'branch' },
-  ];
+export const GridElement: FC<GridElementProps> = ({ apps }) => {
+  const classes = useStyles();
 
   const data = apps.map((app, index) => {
     const stat =
@@ -55,28 +65,31 @@ export const DenseTable: FC<DenseTableProps> = ({ apps }) => {
       ) : (
         <StatusError key={index.toString()} />
       );
-    return {
-      workflow: [stat, app.original_build_params.workflow_id],
-      started: app.started_on_worker_at,
-      triggered: app.triggered_at,
-      branch: app.original_build_params.branch,
-    };
+    return (
+      <Grid item xs={4}>
+        <Card className={classes.root}>
+          <CardContent>
+            <Typography variant="h5" component="h2">
+              {stat} {app.original_build_params.workflow_id}
+            </Typography>
+            <Typography variant="body2" className={classes.pos} component="p">
+              Started: {app.started_on_worker_at}
+              <br />
+              Triggered at: {app.triggered_at}
+              <br />
+              Branch: {app.original_build_params.branch}
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+    );
   });
-
-  return (
-    <Table
-      title="Bitrise workflows only latest and branch master"
-      options={{ search: true, paging: false }}
-      columns={columns}
-      data={data}
-    />
-  );
+  return data;
 };
 
 const BitriseCore: FC<{}> = () => {
   const config = require('./config.js');
   const { value, loading, error } = useAsync(async (): Promise<User[]> => {
-    //    const response = await fetch('https://randomuser.me/api/?results=20');
     const response = await fetch(
       `https://api.bitrise.io/v0.1/apps/${config.app_slug}/builds`,
       {
@@ -97,7 +110,7 @@ const BitriseCore: FC<{}> = () => {
     return <Alert severity="error">{error.message}</Alert>;
   }
 
-  return <DenseTable apps={value || []} />;
+  return <GridElement apps={value || []} />;
 };
 
 export default BitriseCore;

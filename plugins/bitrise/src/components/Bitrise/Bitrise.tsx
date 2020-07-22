@@ -24,13 +24,13 @@ const Bitrise: FC<{}> = () => (
   <Page theme={pageTheme.tool}>
     <Header title="Welcome to Bitrise Builds!" />
     <Content>
-      <Grid container spacing={3} direction="column">
+      <Grid container spacing={3}>
         <Grid item>
           <Settings />
         </Grid>
-        <Grid item>
-          <BitriseCore />
-        </Grid>
+      </Grid>
+      <Grid container spacing={3}>
+        <BitriseCore />
       </Grid>
     </Content>
   </Page>
