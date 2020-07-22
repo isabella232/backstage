@@ -17,7 +17,14 @@
 import React, { useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { InfoCard } from '@backstage/core';
-import { InputLabel, Select, MenuItem, TextField } from '@material-ui/core';
+import {
+  InputLabel,
+  Select,
+  MenuItem,
+  TextField,
+  CardActions,
+  CardContent,
+} from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,24 +47,30 @@ const Settings = () => {
 
   return (
     <InfoCard title="Settings">
-      <form className={classes.root}>
-        <InputLabel id="views-label">Views</InputLabel>
-        <Select
-          labelId="views-label"
-          id="views"
-          value={view}
-          onChange={handleChange}
-        >
-          <MenuItem value="latest on master">Latest on master</MenuItem>
-          <MenuItem value="all">All</MenuItem>
-        </Select>
+      <CardContent>
+        <form className={classes.root}>
+          <InputLabel id="views-label">Views</InputLabel>
+          <Select
+            labelId="views-label"
+            id="views"
+            value={view}
+            onChange={handleChange}
+          >
+            <MenuItem value="latest on master">Latest on master</MenuItem>
+            <MenuItem value="all">All</MenuItem>
+          </Select>
+          <br />
+          <TextField id="standard-search" label="Search field" type="search" />
+        </form>
+      </CardContent>
+      <CardActions>
         <TextField id="appslug" label="App Slug" variant="filled" />
         <TextField
           id="authorizationtoken"
           label="Authorization token"
           variant="filled"
         />
-      </form>
+      </CardActions>
     </InfoCard>
   );
 };

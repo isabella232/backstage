@@ -25,7 +25,7 @@ const Bitrise: FC<{}> = () => (
     <Header title="Welcome to Bitrise Builds!" />
     <Content>
       <Grid container spacing={3}>
-        <Grid item>
+        <Grid item xs={12}>
           <Settings />
         </Grid>
       </Grid>
