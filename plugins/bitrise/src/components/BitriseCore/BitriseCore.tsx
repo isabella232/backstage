@@ -64,7 +64,7 @@ export const DenseTable: FC<DenseTableProps> = ({ apps }) => {
   return (
     <Table
       title="Bitrise workflows only latest and branch master"
-      options={{ search: true, paging: false }}
+      options={{ search: false, paging: false }}
       columns={columns}
       data={data}
     />

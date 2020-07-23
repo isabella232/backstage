@@ -26,9 +26,6 @@ const Bitrise: FC<{}> = () => (
     <Content>
       <Grid container spacing={3} direction="column">
         <Grid item>
-          <Settings />
-        </Grid>
-        <Grid item>
           <BitriseCore />
         </Grid>
       </Grid>
