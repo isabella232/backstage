@@ -57,7 +57,7 @@ const Settings = () => {
           id="standard-search"
           label="Search field"
           type="search"
-          onKeyPress={handleSearchChange}
+          onChange={handleSearchChange}
         />
       </CardContent>
     </InfoCard>
