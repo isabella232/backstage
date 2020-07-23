@@ -77,6 +77,9 @@ export const GridElement: FC<GridElementProps> = ({ apps }) => {
       app => app.branch === 'master' && app.original_build_params.workflow_id,
     )
     .filter(app => {
+      if (view === 'all') {
+        return true;
+      }
       const workflow = app.original_build_params.workflow_id;
       if (!workflows.includes(workflow)) {
         workflows.push(workflow);

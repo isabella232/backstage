@@ -22,8 +22,6 @@ import {
   Select,
   MenuItem,
   TextField,
-  CardActions,
-  CardContent,
   Grid,
 } from '@material-ui/core';
 import { RootContext } from '../../context/RootContext';
@@ -74,7 +72,7 @@ const Settings = () => {
             id="standard-search"
             label="Search field"
             type="search"
-            onKeyPress={handleSearchChange}
+            onChange={handleSearchChange}
           />
         </Grid>
       </Grid>
