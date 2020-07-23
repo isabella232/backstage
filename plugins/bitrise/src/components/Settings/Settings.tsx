@@ -56,19 +56,6 @@ const Settings = () => {
   return (
     <InfoCard title="Settings">
       <CardContent>
-        <form className={classes.root}>
-          <InputLabel id="views-label">Views</InputLabel>
-          <Select
-            labelId="views-label"
-            id="views"
-            value={view}
-            onChange={handleViewChange}
-          >
-            <MenuItem value="latest on master">Latest on master</MenuItem>
-            <MenuItem value="all">All</MenuItem>
-          </Select>
-          <br />
-        </form>
         <TextField
           id="standard-search"
           label="Search field"
@@ -76,14 +63,6 @@ const Settings = () => {
           onKeyPress={handleSearchChange}
         />
       </CardContent>
-      <CardActions>
-        <TextField id="appslug" label="App Slug" variant="filled" />
-        <TextField
-          id="authorizationtoken"
-          label="Authorization token"
-          variant="filled"
-        />
-      </CardActions>
     </InfoCard>
   );
 };
