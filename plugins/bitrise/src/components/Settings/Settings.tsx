@@ -47,10 +47,7 @@ const Settings = () => {
   };
 
   const handleSearchChange = ev => {
-    if (ev.key === 'Enter') {
-      setSearch(ev.target.value);
-      ev.preventDefault();
-    }
+    setSearch(ev.target.value);
   };
 
   return (
