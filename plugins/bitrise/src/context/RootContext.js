@@ -18,7 +18,7 @@ import React, { useState } from 'react';
 export const RootContext = React.createContext();
 
 const Anon = ({ children }) => {
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState('');
   const [view, setView] = useState('');
 
   const defaultContext = {

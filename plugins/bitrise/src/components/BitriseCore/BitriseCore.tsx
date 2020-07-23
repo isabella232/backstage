@@ -57,6 +57,12 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
+  hide: {
+    display: 'none',
+  },
+  show: {
+    display: 'block',
+  },
 });
 
 export const GridElement: FC<GridElementProps> = ({ apps }) => {
@@ -86,7 +92,16 @@ export const GridElement: FC<GridElementProps> = ({ apps }) => {
           <StatusError key={index.toString()} />
         );
       return (
-        <Grid item xs={4} key={Math.floor(Math.random() * Math.floor(30000))}>
+        <Grid
+          item
+          xs={4}
+          key={Math.floor(Math.random() * Math.floor(30000))}
+          className={
+            workflow.includes(search) || search === ''
+              ? classes.show
+              : classes.hide
+          }
+        >
           <Card className={classes.root}>
             <CardContent>
               <Typography variant="h4" component="h2">
