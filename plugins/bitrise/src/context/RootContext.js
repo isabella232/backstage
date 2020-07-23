@@ -19,7 +19,7 @@ export const RootContext = React.createContext();
 
 const Anon = ({ children }) => {
   const [search, setSearch] = useState('');
-  const [view, setView] = useState('');
+  const [view, setView] = useState('latest on master');
 
   const defaultContext = {
     search,

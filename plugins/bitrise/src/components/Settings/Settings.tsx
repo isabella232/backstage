@@ -24,6 +24,7 @@ import {
   TextField,
   CardActions,
   CardContent,
+  Grid,
 } from '@material-ui/core';
 import { RootContext } from '../../context/RootContext';
 
@@ -52,35 +53,31 @@ const Settings = () => {
 
   return (
     <InfoCard title="Settings">
-      <CardContent>
-        <form className={classes.root}>
-          <InputLabel id="views-label">Views</InputLabel>
-          <Select
-            labelId="views-label"
-            id="views"
-            value={view}
-            onChange={handleViewChange}
-          >
-            <MenuItem value="latest on master">Latest on master</MenuItem>
-            <MenuItem value="all">All</MenuItem>
-          </Select>
-          <br />
-        </form>
-        <TextField
-          id="standard-search"
-          label="Search field"
-          type="search"
-          onKeyPress={handleSearchChange}
-        />
-      </CardContent>
-      <CardActions>
-        <TextField id="appslug" label="App Slug" variant="filled" />
-        <TextField
-          id="authorizationtoken"
-          label="Authorization token"
-          variant="filled"
-        />
-      </CardActions>
+      <Grid container spacing={3}>
+        <Grid item xs={6}>
+          <form className={classes.root}>
+            <InputLabel id="views-label">Views</InputLabel>
+            <Select
+              labelId="views-label"
+              id="views"
+              value={view}
+              onChange={handleViewChange}
+            >
+              <MenuItem value="latest on master">Latest on master</MenuItem>
+              <MenuItem value="all">All</MenuItem>
+            </Select>
+            <br />
+          </form>
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            id="standard-search"
+            label="Search field"
+            type="search"
+            onKeyPress={handleSearchChange}
+          />
+        </Grid>
+      </Grid>
     </InfoCard>
   );
 };
